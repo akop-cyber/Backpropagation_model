@@ -51,19 +51,7 @@ while epoch < 50001:
 
 
 
-    #   def o_layer1(w5,w6,b2):
-    #       h1 = h_layer1(x1,x2,w1,w2,b1)
-    #       h2 = h_layer2(x1,x2,w3,w4,b1)
-    #       o1in = h1*w5 + h2*w6 +b2
-    #       o1out = activation(2,o1in)
-    #       return o1out
 
-    #   def o_layer2(w7,w8,b2):
-    #       h1 = h_layer1(x1,x2,w1,w2,b1)
-    #       h2 = h_layer2(x1,x2,w3,w4,b1)
-    #       o2in = h1*w7 + h2*w8 +b2
-    #       o2out = activation(2,o2in)
-    #       return o2out
 
     h1in = x1*w1 + x2*w2 + b1
     h1out = activation(h1in)
