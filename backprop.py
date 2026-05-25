@@ -27,7 +27,7 @@ ro1 = 0.035
 ro2 = 0.7
 
 #learning rate
-l = 0.9
+l = 0.05
 
 epoch = 0
 
