@@ -1,9 +1,16 @@
 import math
 import random
+import streamlit as st
+import matplotlib.pyplot as plt
+import pandas as pd
+
+st.header("_Simple 2 - 2 - 2 Neural Network_",divider="grey" )
+
+
 print("Program started")
 #input
-x1 = 0.05
-x2 = 0.10
+x1 = 0.056
+x2 = 0.027
 
 #weights
 w1 = random.random()
@@ -23,8 +30,8 @@ b1 = 0.35
 b2 = 0.60
 
 #output as input also known as target
-ro1 = 0.035
-ro2 = 0.7
+ro1 = st.number_input("Enter your first desired output")
+ro2 = st.number_input("Enter your second desired output")
 
 #learning rate
 l = 0.05
@@ -45,6 +52,8 @@ def h_layer2(x1,x2,w3,w4,b1):
     h2in = x1*w3 + x2*w4 + b1
     h2out = activation(h2in)
     return h2out
+
+loss = []
 
 while epoch < 50001:
     
@@ -70,6 +79,7 @@ while epoch < 50001:
     e1 = ro1 - o1out
     e2 = ro2 - o2out
     et = 1/2 * ((e1**2) + (e2**2))
+    loss.append(et)
 
     for i in range(5,9):
         if i == 5:
@@ -120,16 +130,17 @@ while epoch < 50001:
             w2 = w2 - l*et_w
         elif x == 3:
             in_w2 = x1
-            out_in2 = h1out*(1- h1out)
+            out_in2 = h2out*(1- h2out)
             e1_in = (o1out - ro1) * o1out*(1 - o1out)
             e2_in = (o2out - ro2) * o2out*(1 - o2out)
             e1_out = e1_in * w6
             e2_out = e2_in * w8
+            et_out = e1_out + e2_out
             et_w = in_w2 * out_in2 * et_out
             w3 = w3 - l*et_w
         elif x == 4:
             in_w2 = x2
-            out_in2 = h1out*(1- h1out)
+            out_in2 = h2out*(1- h2out)
             e1_in = (o1out - ro1) * o1out*(1 - o1out)
             e2_in = (o2out - ro2) * o2out*(1 - o2out)
             e1_out = e1_in * w6
@@ -141,7 +152,17 @@ while epoch < 50001:
     epoch = epoch + 1
 
 
+st.write(f"Prediction 1: {o1out}")
+st.write(f"Prediction 2: {o2out}")
+
+st.header("_Loss curve_", divider=True)
+
+df = pd.DataFrame(loss[::100])
+st.line_chart(df)
+
 print("Target: ",ro1)
 print("Pred: ",o1out)
 print("Target:",ro2)
 print("Pred: ",o2out)
+
+loss.clear()
