@@ -5,6 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 st.header("_Simple 2 - 2 - 2 Neural Network_",divider="grey" )
+st.write("Please input the number between 0 and 1")
 
 
 print("Program started")
